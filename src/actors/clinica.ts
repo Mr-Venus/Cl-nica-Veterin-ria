@@ -1,0 +1,3 @@
+
+import { Animal } from "./animal";
+
