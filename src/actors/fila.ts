@@ -49,4 +49,12 @@ export class Fila<T> {
         
         console.log(" ────────────────────────────────────────────────────");
     }
+
+    public estaVazia(): boolean {
+        return this.elementos.length === 0;
+    }
+
+    public buscarPorId(id: number): T | undefined {
+        return this.elementos.find((item: any) => item.id === id);
+    }
 }

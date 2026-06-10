@@ -29,7 +29,7 @@ Uso estratégico de modificadores de acesso (`public`, `private`, `static`) para
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **Node.js** (Ambiente de execução)
 * **TypeScript** (Linguagem base e tipagem estática)

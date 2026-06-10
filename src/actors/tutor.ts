@@ -1,10 +1,6 @@
-import { Especialidades } from "../enums/especialidades";
-import { Animal } from "./animal";
 
-interface Consulta {
-    data: string,
-    diagnostico?: string
-}
+import { Animal } from "./animal";
+import { Consulta } from "./consulta";
 
 export class Tutor {
     private animais: Animal[] = [];
@@ -13,7 +9,7 @@ export class Tutor {
     constructor(
         public nome: string,
         public cpf: number,
-        public telefone: string
+        public telefone: number
     ) {}
 
     public adicionarAnimal(animal: Animal): void {
@@ -24,23 +20,31 @@ export class Tutor {
         this.historicoConsultas.push(consulta);
     }
 
-    public listarAnimais(): void {
-        console.log(`Animais de ${this.nome}:`);
-
-        for (const animal of this.animais) {
-            console.log(`
-                Nome: ${animal.nome} | Espécie: ${animal.especie}
-            `);
-        }
+    public get listarAnimais(): Animal[] {
+        return this.animais;
     }
 
-    public exibirHistorico(): void {
-        console.log(`Histórico de consultas de ${this.nome}:`);
-
-        for (const consulta of this.historicoConsultas) {
-            console.log(`
-                Data: ${consulta.data} | Diagnóstico: ${consulta.diagnostico ?? "Não informado"}
-            `);
-        }
+    public get historico(): Consulta[] {
+        return this.historicoConsultas;
     }
+
+    // public listarAnimais(): void {
+    //     console.log(`Animais de ${this.nome}:`);
+
+    //     for (const animal of this.animais) {
+    //         console.log(`
+    //             Nome: ${animal.nome} | Espécie: ${animal.especie}
+    //         `);
+    //     }
+    // }
+
+    // public exibirHistorico(): void {
+    //     console.log(`Histórico de consultas de ${this.nome}:`);
+
+    //     for (const consulta of this.historicoConsultas) {
+    //         console.log(`
+    //             Data: ${consulta.data} | Diagnóstico: ${consulta.diagnostico ?? "Não informado"}
+    //         `);
+    //     }
+    // }
 }

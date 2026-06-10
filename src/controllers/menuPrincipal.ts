@@ -1,3 +1,6 @@
+import { menuAtendimento } from "./menuAtendimento";
+import { menuCadastro } from "./menuCadastro";
+import { menuProntuarios } from "./menuProntuarios";
 
 const readline = require("readline-sync");
 
@@ -5,11 +8,9 @@ export function menuPrincipal(): void {
     
     console.clear();
     console.log(`
-    ┌────────────────────────────────────────────────────────┐
-    │            SISTEMA DE GESTÃO VETERINÁRIA               │
-    ├────────────────────────────────────────────────────────┤
-    │ Ambiente de Testes: Ativo                              │
-    └────────────────────────────────────────────────────────┘`);
+┌────────────────────────────────────────────────────────┐
+│            SISTEMA DE GESTÃO VETERINÁRIA               │
+└────────────────────────────────────────────────────────┘`);
 
     console.log(`
     ┌── PAINEL DE CONTROLE ────────────────────────────────┐
@@ -29,14 +30,17 @@ export function menuPrincipal(): void {
     switch(opcao) {
         // CADASTRO( ANIMAL, TUTOR, VETERINARIO)
         case 1:
+            menuCadastro();
             break;
         
         // ATENDIMENTO
         case 2:
+            menuAtendimento();
             break;
 
         // PRONTUÁRIOS
         case 3:
+            menuProntuarios();
             break;
 
         // SAIDA
