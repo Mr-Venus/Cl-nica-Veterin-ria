@@ -21,9 +21,10 @@ export function menuAtendimento() {
 │                                                        │
 └────────────────────────────────────────────────────────┘`);
 
-    const opcao = readline.questionInt("- Opção: ");
+    const opcao = readline.questionInt("- Opcao: ");
 
     switch (opcao) {
+
         case 1: // AGENDAR CONSULTA
             console.clear();
             console.log(`
@@ -31,14 +32,13 @@ export function menuAtendimento() {
     │             PAINEL DE AGENDAMENTO DE CONSULTA          │
     └────────────────────────────────────────────────────────┘`);
 
-            // --- PASSO 1: BUSCAR E SELECIONAR O PACIENTE DO TUTOR ---
             const cpfTutor = readline.questionInt("- Digite o CPF do Tutor: ");
             const listaAnimais = clinica.buscarAnimalDoTutor(cpfTutor); 
 
             if (!listaAnimais || listaAnimais.length === 0) {
                 console.log("\nErro: Nenhum animal localizado para este CPF de Tutor.");
                 readline.question("\nPressione [Enter] para voltar...");
-                return menuAtendimento(); // Usa o return para evitar acúmulo de contexto
+                return menuAtendimento();
             }
 
             console.log("\n--- Animais deste Tutor ---");
@@ -54,7 +54,6 @@ export function menuAtendimento() {
             }
             const pacienteEscolhido = listaAnimais[escolhaAnimal]!;
 
-            // --- PASSO 2: SELECIONAR O VETERINÁRIO ---
             const medicosDisponiveis = clinica.veterinarios; 
 
             if (medicosDisponiveis.length === 0) {
@@ -67,7 +66,7 @@ export function menuAtendimento() {
             medicosDisponiveis.forEach((vet, index) => {
                 console.log(` [ ${index + 1} ] Dr(a). ${vet.nome}`);
             });
-            const escolhaVet = readline.questionInt("- Selecione o número do Veterinário: ") - 1;
+            const escolhaVet = readline.questionInt("- Selecione o numero do Veterinário: ") - 1;
 
             if (escolhaVet < 0 || escolhaVet >= medicosDisponiveis.length) {
                 console.log("\nErro: Opção de veterinário inválida!");
@@ -75,16 +74,23 @@ export function menuAtendimento() {
                 return menuAtendimento();
             }
             const vetEscolhido = medicosDisponiveis[escolhaVet]!;
+            const verificaEspecialidade = vetEscolhido.podeAtender(pacienteEscolhido);
 
-            // --- PASSO 3: COLETAR DADOS DA CONSULTA (Requisito do seu Construtor) ---
+            if(!verificaEspecialidade) {
+                console.log(`\n O(A) Dr(a). ${vetEscolhido.nome} não atende a espécie ${pacienteEscolhido.especie}.\nEspecilides:\n`);
+                vetEscolhido.especialidades.forEach(espec => {
+                    console.log(`- ${espec}`);
+                });
+                readline.question("\nPressione [Enter] para continuar...");
+                return menuAtendimento();
+            }
+
             console.log("\n--- Informações Clínicas Iniciais ---");
             const dataAgendamento = readline.question("- Digite a data do agendamento (ex: 10/06/2026): ");
             const sintomasIniciais = readline.question("- Digite os sintomas relatados: ");
 
-            // Criando a consulta baseada estritamente no seu construtor de consulta.ts
             const novaConsulta = new Consulta(pacienteEscolhido, vetEscolhido, dataAgendamento, sintomasIniciais);
 
-            // Adiciona na fila oficial da clínica
             clinica.obterFila().enqueue(novaConsulta);
 
             console.log(`
@@ -97,14 +103,16 @@ export function menuAtendimento() {
             readline.question("\nPressione [Enter] para voltar ao menu...");
             return menuAtendimento();
 
-        case 2: // REALIZAR ATENDIMENTO (CHAMAR PRÓXIMO)
+            // CASO 2 ATENDIMENTO DO PACIENTE
+        case 2: 
+        // REALIZAR ATENDIMENTO
             console.clear();
             console.log(`
     ┌────────────────────────────────────────────────────────┐
     │             PAINEL DE ATENDIMENTO MÉDICO               │
     └────────────────────────────────────────────────────────┘`);
 
-            if (clinica.obterFila().estaVazia()) {
+            if (clinica.obterFila().estaVazia() || clinica.obterFila().tamanhoElemento === 0) {
                 console.log("\nFila de espera vazia. Nenhum pet aguardando atendimento.");
                 readline.question("\nPressione [Enter] para continuar...");
                 return menuAtendimento();
@@ -122,13 +130,15 @@ export function menuAtendimento() {
                 return menuAtendimento();
             }
 
-            console.log(`\n🩺 Atendendo agora: ${consultaEmAndamento.paciente.nome}`);
+
+            console.log(`\n Atendendo agora: ${consultaEmAndamento.paciente.nome}`);
             const diagnostico = readline.question("- Digite o diagnóstico final: ");
             const receita = readline.question("- Digite a receita de medicamentos: ");
 
             consultaEmAndamento.concluirConsulta(diagnostico, receita);
 
             const fatura = new Cobranca(consultaEmAndamento);
+            clinica.listaCobrancas.push(fatura);
 
             const tutorDono = clinica.tutores.find(tutor => tutor.listarAnimais.includes(consultaEmAndamento.paciente));
             if (tutorDono) {
@@ -148,7 +158,9 @@ export function menuAtendimento() {
             readline.question("\nPressione [Enter] para continuar...");
             return menuAtendimento();
 
-        case 3: // VISUALIZAR FILA
+        // CASO 3 VISUALIZAR A FILA
+        case 3:
+            // VISUALIZAR FILA
             console.clear();
             clinica.obterFila().listar(); 
             readline.question("\nPressione [Enter] para continuar...");

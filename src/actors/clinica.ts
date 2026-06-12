@@ -4,11 +4,13 @@ import { Tutor } from "./tutor";
 import { Consulta } from "./consulta";
 import { Fila } from "./fila";
 import { Animal } from "./animal";
+import { Cobranca } from "./cobranca";
 
 export class Clinica {
 
     public tutores: Tutor[] = [];
     public veterinarios: Veterinario[] = [];
+    public listaCobrancas: Cobranca[] = [];
     public filaEspera: Fila<Consulta> = new Fila<Consulta>();
     private static instance: Clinica;
 

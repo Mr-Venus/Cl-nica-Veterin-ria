@@ -1,5 +1,6 @@
 import { menuAtendimento } from "./menuAtendimento";
 import { menuCadastro } from "./menuCadastro";
+import { menuFinanceiro } from "./menuFinanceiro";
 import { menuProntuarios } from "./menuProntuarios";
 
 const readline = require("readline-sync");
@@ -18,7 +19,7 @@ export function menuPrincipal(): void {
     │  [ 1 ]  Cadastrar                                    │
     │  [ 2 ]  Iniciar Atendimento Clínico                  │
     │  [ 3 ]  Listar Prontuários                           │
-    │                                                      │
+    │  [ 4 ]  Financeiro                                   │
     │  [ 0 ]  Sair do Sistema                              │
     │                                                      │
     └──────────────────────────────────────────────────────┘`);
@@ -42,9 +43,24 @@ export function menuPrincipal(): void {
         case 3:
             menuProntuarios();
             break;
+        // FINANCEIRO
+        case 4:
+            menuFinanceiro();
+            break;
 
         // SAIDA
-        case 5:
+        case 0:
+            console.log(`
+┌────────────────────────────────────────────────────────┐
+│             SISTEMA ENCERRADO COM SUCESSO              │
+├────────────────────────────────────────────────────────┤
+│                                                        │
+│   Obrigado por utilizar o nosso Sistema, agradecemos a │
+│   sua preferencia!                                     │
+│   Tenha um ótimo dia de trabalho!                      │
+│                                                        │
+└────────────────────────────────────────────────────────┘
+            `);
             break;
 
         default:

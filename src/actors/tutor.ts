@@ -28,16 +28,6 @@ export class Tutor {
         return this.historicoConsultas;
     }
 
-    // public listarAnimais(): void {
-    //     console.log(`Animais de ${this.nome}:`);
-
-    //     for (const animal of this.animais) {
-    //         console.log(`
-    //             Nome: ${animal.nome} | Espécie: ${animal.especie}
-    //         `);
-    //     }
-    // }
-
     // public exibirHistorico(): void {
     //     console.log(`Histórico de consultas de ${this.nome}:`);
 

@@ -22,16 +22,17 @@ export function menuCadastro(){
     │  [ 1 ]     Cadastro Tutor                              │
     │  [ 2 ]     Cadastro Veterinario                        │
     │  [ 3 ]     Cadastro Animal                             │
-    │  │                                                     │
+    │                                                        │
     │  [ 0 ]      Voltar ao Menu Principal                   │
     │                                                        │
     └────────────────────────────────────────────────────────┘`);
 
-    const opcao = readline.questionInt("- Opção: ");
+    const opcao = readline.questionInt("- Opcao: ");
 
     switch(opcao) {
 
         case 1:
+            console.clear();
             console.log(`
     ┌────────────────────────────────────────────────────────┐
     │          FORMULÁRIO - CADASTRO DE TUTOR                │
@@ -46,7 +47,7 @@ export function menuCadastro(){
     └────────────────────────────────────────────────────────┘`);
             const tutorNome = readline.question("- Digite o nome: ");
             const tutorCpf = readline.questionInt("- Digite o CPF: ");
-            const tutorNumero = readline.questionInt("- Digite o número para contato: ");
+            const tutorNumero = readline.questionInt("- Digite o numero para contato: ");
 
             const novoTutor = new Tutor(tutorNome, tutorCpf, tutorNumero); 
 
@@ -55,6 +56,7 @@ export function menuCadastro(){
             break;
 
         case 2:
+            console.clear();
             console.log(`
     ┌────────────────────────────────────────────────────────┐
     │         FORMULÁRIO - CADASTRO DE VETERINÁRIO           │
@@ -118,6 +120,7 @@ export function menuCadastro(){
 
         case 3: 
             // animal cadastro
+            console.clear();
             console.log(`
     ┌────────────────────────────────────────────────────────┐
     │          FORMULÁRIO - CADASTRO DE ANIMAL               │
