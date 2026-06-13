@@ -77,6 +77,7 @@ export function menuCadastro(){
             const veterinarioEspecialidade: Especialidades[] = [];
             
             for (let i = 0; i < quantidadeEspecialidades; i++) {
+                console.clear();
                 console.log(`
                 ┌────────────────────────────────────────────────────────┐
                 │         FORMULÁRIO - CADASTRO DE VETERINÁRIO           │
@@ -88,7 +89,7 @@ export function menuCadastro(){
                     console.log(` [ ${index + 1} ]  ${especialidade}`);
                 });
 
-                const escolhaEspecialidade = readline.questionInt(`- Escolha o numero da ${i + 1}ª especialidade: `);
+                const escolhaEspecialidade = readline.questionInt(`- Escolha o numero da ${i + 1} especialidade: `);
                 const indiceReal = escolhaEspecialidade - 1;
 
                 // Validação para garantir que o número digitado existe na lista
@@ -102,14 +103,14 @@ export function menuCadastro(){
 
                 // Evita que o usuário escolha a mesma especialidade duas vezes
                 if (veterinarioEspecialidade.includes(especialidadeSelecionada)) {
-                    console.log(" Você já adicionou essa especialidade! Escolha uma diferente.");
+                    console.log(" Você ja adicionou essa especialidade! Escolha uma diferente.");
                     i--; // Repete a escolha
                     continue;
                 }
 
                 // Guarda a especialidade aprovada na lista
                 veterinarioEspecialidade.push(especialidadeSelecionada);
-                console.log(` [${especialidadeSelecionada}] adicionada!`);
+                console.log(`- Especialidae ${especialidadeSelecionada} adicionada!`);
             }
             const novoVeterinario = new Veterinario(veterinarioNome, veterinarioCrmv, veterinarioEspecialidade); 
             // passar uma lista de especialidades para o veterinario

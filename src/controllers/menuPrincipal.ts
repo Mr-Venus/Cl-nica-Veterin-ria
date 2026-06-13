@@ -50,6 +50,7 @@ export function menuPrincipal(): void {
 
         // SAIDA
         case 0:
+            console.clear();
             console.log(`
 ┌────────────────────────────────────────────────────────┐
 │             SISTEMA ENCERRADO COM SUCESSO              │

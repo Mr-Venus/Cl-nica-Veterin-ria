@@ -33,10 +33,11 @@ export class Fila<T> {
         
         console.log(`\n
  ──────────────────────────────────────────────────
-    PROXIMO PACIENTE: [${proximo.paciente.id}]   ${proximo.paciente.nome}                   
+    PROXIMO PACIENTE: [${proximo.id}]   ${proximo.paciente.nome}                   
     Favor dirigir-se ao Consultório Veterinário.
  ──────────────────────────────────────────────────
                 `);
+        
     }
 
     public listar(): void {

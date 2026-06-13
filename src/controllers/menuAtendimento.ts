@@ -57,7 +57,7 @@ export function menuAtendimento() {
             const medicosDisponiveis = clinica.veterinarios; 
 
             if (medicosDisponiveis.length === 0) {
-                console.log("\nErro: Não há veterinários cadastrados no sistema.");
+                console.log("\nErro: Nao ha veterinarios cadastrados no sistema.");
                 readline.question("\nPressione [Enter] para continuar...");
                 return menuAtendimento();
             }
@@ -69,7 +69,7 @@ export function menuAtendimento() {
             const escolhaVet = readline.questionInt("- Selecione o numero do Veterinário: ") - 1;
 
             if (escolhaVet < 0 || escolhaVet >= medicosDisponiveis.length) {
-                console.log("\nErro: Opção de veterinário inválida!");
+                console.log("\nErro: Opção de veterinário invalida!");
                 readline.question("\nPressione [Enter] para continuar...");
                 return menuAtendimento();
             }
@@ -77,7 +77,7 @@ export function menuAtendimento() {
             const verificaEspecialidade = vetEscolhido.podeAtender(pacienteEscolhido);
 
             if(!verificaEspecialidade) {
-                console.log(`\n O(A) Dr(a). ${vetEscolhido.nome} não atende a espécie ${pacienteEscolhido.especie}.\nEspecilides:\n`);
+                console.log(`\n O(A) Dr(a). ${vetEscolhido.nome} nao atende a especie ${pacienteEscolhido.especie}.\nEspecilides:\n`);
                 vetEscolhido.especialidades.forEach(espec => {
                     console.log(`- ${espec}`);
                 });
@@ -85,7 +85,7 @@ export function menuAtendimento() {
                 return menuAtendimento();
             }
 
-            console.log("\n--- Informações Clínicas Iniciais ---");
+            console.log("\n--- Informações Clinicas Iniciais ---");
             const dataAgendamento = readline.question("- Digite a data do agendamento (ex: 10/06/2026): ");
             const sintomasIniciais = readline.question("- Digite os sintomas relatados: ");
 
@@ -93,6 +93,11 @@ export function menuAtendimento() {
 
             clinica.obterFila().enqueue(novaConsulta);
 
+            const tutorDono = clinica.tutores.find(tutor => tutor.listarAnimais.includes(pacienteEscolhido));
+            if (tutorDono) {
+                tutorDono.adicionarConsulta(novaConsulta);
+            }
+            
             console.log(`
 ┌────────────────────────────────────────────────────────┐
 │    CONSULTA AGENDADA COM SUCESSO!                      │
@@ -139,11 +144,6 @@ export function menuAtendimento() {
 
             const fatura = new Cobranca(consultaEmAndamento);
             clinica.listaCobrancas.push(fatura);
-
-            const tutorDono = clinica.tutores.find(tutor => tutor.listarAnimais.includes(consultaEmAndamento.paciente));
-            if (tutorDono) {
-                tutorDono.adicionarConsulta(consultaEmAndamento);
-            }
 
             clinica.obterFila().dequeue(idAtendimento);
 
