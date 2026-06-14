@@ -1,3 +1,4 @@
+// IMPORTS
 import { menuAtendimento } from "./menuAtendimento";
 import { menuCadastro } from "./menuCadastro";
 import { menuFinanceiro } from "./menuFinanceiro";
@@ -5,12 +6,16 @@ import { menuProntuarios } from "./menuProntuarios";
 
 const readline = require("readline-sync");
 
+/*
+    Menu Principal - Controla o Fluxo do Sistema
+*/
 export function menuPrincipal(): void {
     
     console.clear();
+    // MENU INTERATIVO - Painel Principal do Sistema
     console.log(`
 ┌────────────────────────────────────────────────────────┐
-│            SISTEMA DE GESTÃO VETERINÁRIA               │
+│            SISTEMA DE GESTAO VETERINÁRIA               │
 └────────────────────────────────────────────────────────┘`);
 
     console.log(`
@@ -64,8 +69,9 @@ export function menuPrincipal(): void {
             `);
             break;
 
+        // caminho para opcao fora das possiveis do sistema
         default:
-            console.log("\n- Opção inválida!");
+            console.log("\n- Opcao invalida!");
             readline.question("\nPressione [Enter] para tentar novamente...");
             menuPrincipal();
             break;

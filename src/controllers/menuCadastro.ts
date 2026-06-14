@@ -1,6 +1,5 @@
-
+// IMPORTS
 const readline = require("readline-sync");
-import { Fila } from "../actors/fila";
 import { Clinica } from "../actors/clinica";
 import { Tutor } from "../actors/tutor";
 import { Veterinario } from "../actors/veterinario";
@@ -8,12 +7,15 @@ import { Especialidades } from "../enums/especialidades";
 import { Ave, Cachorro, Gato, Reptil} from "../actors/animal";
 import { menuPrincipal } from "./menuPrincipal";
 
+/*
+    Menu Cadastro - Controla o fluxo e realiza cadastro dos atores no Sistema
+*/
 export function menuCadastro(){
-    const fila = new(Fila);
+    // instancia do nosso "banco de dados"
     const clinica = Clinica.getInstance();
     
     console.clear();
-    // MENU INTERATIVO
+    // MENU INTERATIVO - Cadastro
     console.log(`
     ┌────────────────────────────────────────────────────────┐
     │     PAINEL DE CADASTRO - CONSULTÓRIO CLÍNICO           │
@@ -45,10 +47,11 @@ export function menuCadastro(){
     │   • Número de Telefone:                                │
     │                                                        │
     └────────────────────────────────────────────────────────┘`);
+            // Coleta informacoes do Tutor
             const tutorNome = readline.question("- Digite o nome: ");
             const tutorCpf = readline.questionInt("- Digite o CPF: ");
             const tutorNumero = readline.questionInt("- Digite o numero para contato: ");
-
+            // Cria o objeto tutor a partir das informacoes passadas
             const novoTutor = new Tutor(tutorNome, tutorCpf, tutorNumero); 
 
             clinica.cadastrarTutor(novoTutor);
@@ -69,13 +72,18 @@ export function menuCadastro(){
     │   • Especialidade:                                     │
     │                                                        │
     └────────────────────────────────────────────────────────┘`);
+            // Coleta informacoes do Veterinario
             const veterinarioNome = readline.question("- Digite o nome: ");
             const veterinarioCrmv = readline.question("- Digite o CRMV: ");
-
             const quantidadeEspecialidades = readline.questionInt("- Quantas especialidades este veterinario possui? ");
+            // Declaracao de variaveis - lista de especialidades e especialidade do veterinario em si
             const listaEspecialidades = Object.values(Especialidades);
             const veterinarioEspecialidade: Especialidades[] = [];
             
+            /*
+                For responsavel por adicinoar a lista de especialides que pertence ao
+                veterinario a ser cadastrado
+            */
             for (let i = 0; i < quantidadeEspecialidades; i++) {
                 console.clear();
                 console.log(`
@@ -84,7 +92,8 @@ export function menuCadastro(){
                 ├────────────────────────────────────────────────────────┤
                 │    Selecione a especialidade ${i + 1} de ${quantidadeEspecialidades}             │
                 └────────────────────────────────────────────────────────┘`);
-
+                
+                // Apresenta todas as especialidades disponiveis para cadastro
                 listaEspecialidades.forEach((especialidade, index) => {
                     console.log(` [ ${index + 1} ]  ${especialidade}`);
                 });
@@ -126,7 +135,7 @@ export function menuCadastro(){
     ┌────────────────────────────────────────────────────────┐
     │          FORMULÁRIO - CADASTRO DE ANIMAL               │
     └────────────────────────────────────────────────────────┘`);
-
+            // Cadastra o animal por base no cpf do TUTOR
             const cpfDono = readline.questionInt("- Digite o CPF do Tutor proprietario: ");
             // Buscamos o objeto Tutor dentro da clinica para poder usar o metodo 'adicionarAnimal'
             const tutorDono = clinica.tutores.find(tutor => tutor.cpf === cpfDono);
@@ -136,12 +145,11 @@ export function menuCadastro(){
                 readline.question("\nPressione [Enter] para continuar...");
                 return menuCadastro();
             }
-
+            // Localiza o tutor e coleta os dados do Animal
             console.log(`\nTutor localizado: ${tutorDono.nome}`);
             const nomeAnimal = readline.question("- Nome do Animal: ");
             const racaAnimal = readline.question("- Raca: ");
             const pesoAnimal = readline.questionFloat("- Peso (kg): ");
-
             console.log(`
                 \n--- Selecione a Especie ---
                 [ 1 ] Canino
@@ -150,8 +158,9 @@ export function menuCadastro(){
                 [ 4 ] Reptil
                 `);
             const opcaoEspecie = readline.questionInt("- Opcao de especie: ");
+            // instancia um novo animal e dependendo da especie declara o objeto correspondente
             let novoAnimal;
-
+            // switch case para declarar o animal baseado na especie
             switch (opcaoEspecie) {
                 case 1:
                     novoAnimal = new Cachorro(nomeAnimal, racaAnimal, pesoAnimal);
@@ -180,12 +189,13 @@ export function menuCadastro(){
             break;
         
         case 0:
-
+            // retorno ao menu 
             menuPrincipal();
             break;
         default:
+            // Controle para opcao invalida
             console.clear;
-            console.log("\n- Opção de cadastro inválida!");
+            console.log("\n- Opcao de cadastro invalida!");
             readline.question("\nPressione [Enter] para tentar novamente...");
             menuCadastro();
             break;

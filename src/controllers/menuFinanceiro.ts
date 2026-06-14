@@ -1,3 +1,4 @@
+// IMPORTS
 const readline = require("readline-sync");
 import { menuPrincipal } from "./menuPrincipal";
 import { Clinica } from "../actors/clinica";
