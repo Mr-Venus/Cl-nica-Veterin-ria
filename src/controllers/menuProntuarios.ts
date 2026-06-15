@@ -1,16 +1,22 @@
-
+// IMPORTS
 const readline = require("readline-sync");
 import { Clinica } from "../actors/clinica";
 import { menuPrincipal } from "./menuPrincipal";
 
-
+ // instancia do nosso "banco de dados"
+const clinica = Clinica.getInstance();
+/*
+    Menu Prontuarios - Controla o hitorico dos tutores no sistema
+*/
 export function menuProntuarios(): void {
-    const clinica = Clinica.getInstance();
+    // Chama instancia de clinica e apresenta a lista de tutores
+    
     console.clear();
     console.log("\n--- PRONTUARIO: TUTORES NO SISTEMA ---");
 
     const listaTutores = clinica.tutores;
 
+    // verifica se ha tutores
     if (listaTutores.length === 0) {
         console.log("\nNenhum tutor cadastrado ainda.");
         readline.question("\nPressione Enter para voltar...");
@@ -29,6 +35,7 @@ export function menuProntuarios(): void {
         return menuPrincipal();
     }
 
+    // Garante uma escolha veridica
     if (indexEscolhido < 0 || indexEscolhido >= listaTutores.length) {
         console.log("\nOpcao incorreta.");
         readline.question("\nPressione Enter para continuar...");
@@ -58,6 +65,7 @@ export function menuProntuarios(): void {
     console.log("\n--- HISTORICO (MAXIMO 3 CONSULTAS) ---");
     const consultasTutor = tutorSelecionado.historico;
 
+    // Verifica consultas de tutor
     if (consultasTutor.length === 0) {
         console.log("Nao existem consultas registradas para este tutor.");
     } else {

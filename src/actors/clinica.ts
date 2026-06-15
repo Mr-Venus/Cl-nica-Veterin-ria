@@ -1,17 +1,20 @@
-
+// IMPORTS
 import { Veterinario } from "./veterinario";
 import { Tutor } from "./tutor";
 import { Consulta } from "./consulta";
 import { Fila } from "./fila";
 import { Animal } from "./animal";
 import { Cobranca } from "./cobranca";
-
+/*
+    Classe Clinica - "banco de dados do projeto", armazena as instancias de tutores, veterinarios, cobrancas e filas
+*/
 export class Clinica {
 
     public tutores: Tutor[] = [];
     public veterinarios: Veterinario[] = [];
     public listaCobrancas: Cobranca[] = [];
     public filaEspera: Fila<Consulta> = new Fila<Consulta>();
+    // 
     private static instance: Clinica;
 
     private constructor(){}

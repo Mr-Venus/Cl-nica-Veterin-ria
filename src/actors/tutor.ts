@@ -1,7 +1,10 @@
-
+// IMPORTS
 import { Animal } from "./animal";
 import { Consulta } from "./consulta";
 
+/*
+    Classe Tutor - Apresenta lista de animais e consultas
+*/
 export class Tutor {
     private animais: Animal[] = [];
     private historicoConsultas: Consulta[] = [];
@@ -12,29 +15,24 @@ export class Tutor {
         public telefone: number
     ) {}
 
+    // Adiciona animal a lista
     public adicionarAnimal(animal: Animal): void {
         this.animais.push(animal);
     }
 
+    // Adiciona consulta a lista
     public adicionarConsulta(consulta: Consulta): void {
         this.historicoConsultas.push(consulta);
     }
 
+    // Retorna lista de animais 
     public get listarAnimais(): Animal[] {
         return this.animais;
     }
 
+    // Retorna lista de consultas
     public get historico(): Consulta[] {
         return this.historicoConsultas;
     }
 
-    // public exibirHistorico(): void {
-    //     console.log(`Histórico de consultas de ${this.nome}:`);
-
-    //     for (const consulta of this.historicoConsultas) {
-    //         console.log(`
-    //             Data: ${consulta.data} | Diagnóstico: ${consulta.diagnostico ?? "Não informado"}
-    //         `);
-    //     }
-    // }
 }

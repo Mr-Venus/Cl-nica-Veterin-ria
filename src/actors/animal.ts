@@ -1,5 +1,8 @@
+// IMPORTS
 import { Especialidades } from "../enums/especialidades";
-
+/*
+    Classe pai Animal e classes filhas especies - herança de atributos de animais e indiviualidades por meio das especies
+*/
 export abstract class Animal {
     public static contadorId: number = 1;
     public id: number; 

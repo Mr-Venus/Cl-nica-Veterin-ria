@@ -5,6 +5,7 @@ import { Clinica } from "../actors/clinica";
 import { Consulta } from "../actors/consulta";
 import { Cobranca } from "../actors/cobranca";
 
+ // instancia do nosso "banco de dados"
 const clinica = Clinica.getInstance();
 /*
     Menu Atendimento - Controla o fluxo de consultas (agendamento, consulta e fila de espera)

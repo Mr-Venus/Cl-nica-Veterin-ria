@@ -1,16 +1,22 @@
 
+/*
+    Classe Fila - Fila generica que recebe tipo variado de dado e manipula de acordo com a necessidade
+*/
 export class Fila<T> {
 
     private elementos: T[] = [];
 
+    // Retorna o tamanho da lista de elementos
     public get tamanhoElemento(): number {
         return this.elementos.length;
     }
 
+    // Insere elemento na lista
     public enqueue(item: T): void {
         this.elementos.push(item);
     }
 
+    // Remove elemento da lista
     public dequeue(id: number ):void {
         const indice = this.elementos.findIndex((item: any) => item.id === id);
 
@@ -23,6 +29,7 @@ export class Fila<T> {
         console.log(`\n Remoção concluida!`);
     }
 
+    // busca o proximo paciente
     public peek(): void {
         if (this.estaVazia() || !this.elementos[0]) {
             console.log("\n A fila está vazia! Nenhum pet aguardando no momento.");
@@ -40,6 +47,7 @@ export class Fila<T> {
         
     }
 
+    // Lista todos os elementos da fila
     public listar(): void {
         console.log("\n ────  FILA DE ESPERA ────────────────────────");
         
@@ -54,10 +62,12 @@ export class Fila<T> {
         console.log(" ────────────────────────────────────────────────────");
     }
 
+    // Verifica se ha elementos
     public estaVazia(): boolean {
         return this.tamanhoElemento === 0;
     }
 
+    // busca elementos na lista por id e retorna se ha ou nao aquele id na lista
     public buscarPorId(id: number): T | undefined {
         return this.elementos.find((item: any) => item.id === id);
     }

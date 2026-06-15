@@ -7,13 +7,14 @@ import { Especialidades } from "../enums/especialidades";
 import { Ave, Cachorro, Gato, Reptil} from "../actors/animal";
 import { menuPrincipal } from "./menuPrincipal";
 
+ // instancia do nosso "banco de dados"
+    const clinica = Clinica.getInstance();
+    
 /*
     Menu Cadastro - Controla o fluxo e realiza cadastro dos atores no Sistema
 */
 export function menuCadastro(){
-    // instancia do nosso "banco de dados"
-    const clinica = Clinica.getInstance();
-    
+   
     console.clear();
     // MENU INTERATIVO - Cadastro
     console.log(`

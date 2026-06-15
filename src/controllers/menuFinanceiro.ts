@@ -3,9 +3,14 @@ const readline = require("readline-sync");
 import { menuPrincipal } from "./menuPrincipal";
 import { Clinica } from "../actors/clinica";
 
+ // instancia do nosso "banco de dados"
 const clinica = Clinica.getInstance();
 
+/*
+    Menu Financeiro - Controla o fluxo monetario do Sistema
+*/
 export function menuFinanceiro() {
+     // MENU INTERATIVO - Painel Financeiro do Sistema
     console.clear();
     console.log(`
         --- CONTROLE FINANCEIRO DA CLINICA ---
@@ -26,9 +31,11 @@ export function menuFinanceiro() {
             // filtra apenas o que nao foi pago
             const contasEmAberto = clinica.listaCobrancas.filter(item => item.pago === false);
 
+            // Garante que haja conta em aberto
             if (contasEmAberto.length === 0) {
                 console.log("Nao existem dividas pendentes na lista.");
             } else {
+                // Apresenta os dados da consulta a ser paga
                 contasEmAberto.forEach((item, i) => {
                     console.log(`[ ${i + 1} ] ID: ${item.consulta.id} | Pet: ${item.consulta.paciente.nome} | Valor: R$ ${item.valor.toFixed(2)}`);
                 });
@@ -37,6 +44,7 @@ export function menuFinanceiro() {
                 if (querPagar.toLowerCase() === "s") {
                     const indiceCobranca = readline.questionInt("Digite o numero correspondente da lista: ") - 1;
                     
+                    // Garante uma resposta coerente
                     if (indiceCobranca >= 0 && indiceCobranca < contasEmAberto.length) {
                         // altera o booleano de pago para true diretamente no objeto original
                         contasEmAberto[indiceCobranca]!.pago = true;
@@ -84,6 +92,7 @@ export function menuFinanceiro() {
                 }
             }
 
+            // Apresenta relatorio financeiro
             console.log(`
                 Fichas de atendimento: ${clinica.listaCobrancas.length}
                 Faturamento bruto:      R$ ${totalFaturado.toFixed(2)}
