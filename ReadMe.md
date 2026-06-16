@@ -1,7 +1,6 @@
-# - Clinica Veterinária
+# - Clinica Veterinaria - Sistema de Gerenciamento Clinico
 
-O sistema é uma plataforma de gerenciamento clínico veterinário desenvolvida em TypeScript para execução em ambiente de terminal. O projeto foi projetado com base em conceitos de Programação Orientada a Objetos (POO), estruturas de dados avançadas e tipagem estática, simulando o fluxo operacional, clínico e financeiro de um hospital veterinário.
-
+O sistema e uma plataforma de gerenciamento clinico veterinario desenvolvida em TypeScript para execucao em ambiente de terminal (CLI). O projeto foi projetado com base em conceitos de Programacao Orientada a Objetos (POO), estruturas de dados avancadas e tipagem estatica, simulando o fluxo operacional, clinico e financeiro de um hospital veterinario.
 ---
 
 ## 1. Funcionalidades do Sistema
@@ -16,6 +15,7 @@ O sistema é uma plataforma de gerenciamento clínico veterinário desenvolvida 
 * **Fila de Espera FIFO (First In, First Out):** Fluxo de atendimento sequencial rígido, garantindo que o primeiro paciente agendado seja o primeiro a ser atendido.
 * **Validação de Aptidão Clínica:** Bloqueio automatizado de agendamentos caso o veterinário selecionado não possua a espécie do paciente listada em suas especialidades, exibindo as opções válidas em caso de inconsistência.
 * **Registro Clínico:** Coleta de sintomas iniciais durante a triagem, seguidos pelo diagnóstico final e emissão de receita médica na conclusão do procedimento.
+* **Alertas Visuais de Restricoes:** Exibicao em tempo real de contraindicacoes alergicas e restricoes medicas do paciente no momento da consulta, auxiliando o veterinario na prescrição segura de medicamentos.
 
 ### 1.3 Prontuário e Histórico Médico
 * **Centralização de Prontuários:** Exibição estruturada de todos os animais vinculados a um tutor selecionado.
@@ -52,3 +52,28 @@ public static getInstance(): Clinica {
     }
     return this.instance;
 }
+```
+### 2.4 Padrão Observer
+Utilizado para o gerenciamento de eventos e notificacoes. A classe `Tutor` implementa a interface `Observer`. Quando a fila de espera e processada e o metodo `peek()` ou o fluxo de atendimento invoca o proximo paciente, o sistema aciona o metodo `notificar(animal: Animal)`, simulando o envio imediato de um alerta para o terminal com os dados do proprietario.
+
+## 3. Instruções para instalação
+
+### 3.1 Pré-requisito
+* Node.js instalado(16 ou superior)
+
+### 3.2 Passo a Passo Inicialização
+
+1. Clone o repositorio para a sua maquina local.
+2. Acesse o diretorio raiz do projeto atraves do terminal:
+```Bash
+cd NOME_DO_DIRETORIO
+```
+3. Instale as dependencias do projeto mapeadas no `package.json` (incluindo o `TypeScript` e a biblioteca `readline-sync`):
+```Bash
+npm install
+```
+4. Execute a aplicacao em ambiente de desenvolvimento utilizando o compilador em tempo de execucao:
+```Bash
+npm start
+```
+* **Observacao:** O terminal `PowerShell` pode apresentar restricoes de execucao de scripts em determinados ambientes Windows. Caso encontre falhas ou impedimentos de permissao no console padrao, clique na opcao de alternancia de terminal (`icone de seta ao lado do simbolo de adicao +`), selecione o console Command Prompt (CMD) e execute o comando de inicializacao normalmente por este ambiente de comandos.

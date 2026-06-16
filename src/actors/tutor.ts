@@ -1,11 +1,12 @@
 // IMPORTS
 import { Animal } from "./animal";
 import { Consulta } from "./consulta";
+import { Observer } from "../interfaces/observer";
 
 /*
     Classe Tutor - Apresenta lista de animais e consultas
 */
-export class Tutor {
+export class Tutor implements Observer {
     private animais: Animal[] = [];
     private historicoConsultas: Consulta[] = [];
 
@@ -33,6 +34,18 @@ export class Tutor {
     // Retorna lista de consultas
     public get historico(): Consulta[] {
         return this.historicoConsultas;
+    }
+
+    // Notifica o tutor quando o animal for chamado
+    notificar(animal: Animal): void {
+        console.log(`
+\n
+┌────────────────────────────────────────────────────────┐
+     NOTIFICAÇÃO ENVIADA PARA: ${this.nome.toUpperCase()} | NUMERO: ${this.telefone} 
+ ────────────────────────────────────────────────────────
+  Ola, ${this.nome}! Seu pet ${animal.nome} foi chamado.         
+  Por favor, dirija-se imediatamente ao Consultório.   
+└────────────────────────────────────────────────────────┘`);
     }
 
 }

@@ -49,7 +49,7 @@ export function menuCadastro(){
     │                                                        │
     └────────────────────────────────────────────────────────┘`);
             // Coleta informacoes do Tutor
-            const tutorNome = readline.question("- Digite o nome: ");
+            const tutorNome = readline.question("- Digite o nome: ").trim();
             const tutorCpf = readline.questionInt("- Digite o CPF: ");
             const tutorNumero = readline.questionInt("- Digite o numero para contato: ");
             // Cria o objeto tutor a partir das informacoes passadas
@@ -74,8 +74,8 @@ export function menuCadastro(){
     │                                                        │
     └────────────────────────────────────────────────────────┘`);
             // Coleta informacoes do Veterinario
-            const veterinarioNome = readline.question("- Digite o nome: ");
-            const veterinarioCrmv = readline.question("- Digite o CRMV: ");
+            const veterinarioNome = readline.question("- Digite o nome: ").trim();
+            const veterinarioCrmv = readline.question("- Digite o CRMV: ").trim();
             const quantidadeEspecialidades = readline.questionInt("- Quantas especialidades este veterinario possui? ");
             // Declaracao de variaveis - lista de especialidades e especialidade do veterinario em si
             const listaEspecialidades = Object.values(Especialidades);
@@ -148,8 +148,8 @@ export function menuCadastro(){
             }
             // Localiza o tutor e coleta os dados do Animal
             console.log(`\nTutor localizado: ${tutorDono.nome}`);
-            const nomeAnimal = readline.question("- Nome do Animal: ");
-            const racaAnimal = readline.question("- Raca: ");
+            const nomeAnimal = readline.question("- Nome do Animal: ").trim();
+            const racaAnimal = readline.question("- Raca: ").trim();
             const pesoAnimal = readline.questionFloat("- Peso (kg): ");
             console.log(`
                 \n--- Selecione a Especie ---
