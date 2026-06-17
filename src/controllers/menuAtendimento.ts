@@ -216,7 +216,7 @@ export function menuAtendimento() {
                 // Se houver, filtra essa restrição e guarda na variavel restricaoBloqueada
                 if(encontradaRestricao){
                     const restricaoBloqueada = consultaEmAndamento.paciente.restricoes.filter(restr => {
-                        receita.includes(restr);
+                        return receita.includes(restr);
                     });
                 // Apresenta a restrição bloqueada
                     console.log(`
@@ -226,7 +226,7 @@ export function menuAtendimento() {
         - A prescricao foi bloqueada por segurança. Por favor, reescreva com um medicamento seguro.
         -> Componente(s) bloqueado(s): `);
                     restricaoBloqueada.forEach(restr => {
-                        console.log(`- [${restr.toLocaleUpperCase()}]`);
+                        console.log(`- [${restr.toUpperCase()}]`);
                     });
                 } else {
                     // se não houver alergia, valida a receita e segue para a proxima etapa

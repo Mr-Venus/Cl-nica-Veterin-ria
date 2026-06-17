@@ -113,8 +113,9 @@ export function menuCadastro(){
 
                 // Evita que o usuário escolha a mesma especialidade duas vezes
                 if (veterinarioEspecialidade.includes(especialidadeSelecionada)) {
-                    console.log(" Você ja adicionou essa especialidade! Escolha uma diferente.");
+                    console.log(` Você ja adicionou a especialidade [${especialidadeSelecionada}]! Escolha uma diferente.`);
                     i--; // Repete a escolha
+                    readline.question("\nPressione [Enter] para continuar...");
                     continue;
                 }
 
@@ -195,7 +196,7 @@ export function menuCadastro(){
             break;
         default:
             // Controle para opcao invalida
-            console.clear;
+            console.clear();
             console.log("\n- Opcao de cadastro invalida!");
             readline.question("\nPressione [Enter] para tentar novamente...");
             menuCadastro();
